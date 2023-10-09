@@ -24,7 +24,7 @@ func (r *Relay) AddEndpoints(endpoint ...*Endpoint) {
 }
 
 func (r Relay) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	data := &map[string]interface{}{}
+	data := &map[string]any{}
 
 	err := json.NewDecoder(req.Body).Decode(data)
 	if err != nil {
@@ -43,13 +43,13 @@ func stringify(v any) (out string, err error) {
 	return out, err
 }
 
-func prepare(in *map[string]interface{}) (err error) {
+func prepare(in *map[string]any) (err error) {
 	(*in)["stringified"], err = stringify(*in)
 
 	return err
 }
 
-func processEndpoint(endpoint *Endpoint, data *map[string]interface{}) (err error) {
+func processEndpoint(endpoint *Endpoint, data *map[string]any) (err error) {
 
 	err = prepare(data)
 	if err != nil {
@@ -89,7 +89,7 @@ func processEndpoint(endpoint *Endpoint, data *map[string]interface{}) (err erro
 	return nil
 }
 
-func (r Relay) relay(data *map[string]interface{}) {
+func (r Relay) relay(data *map[string]any) {
 	errors := make(chan error, len(r.endpoints))
 	wg := sync.WaitGroup{}
 	wg.Add(len(r.endpoints))

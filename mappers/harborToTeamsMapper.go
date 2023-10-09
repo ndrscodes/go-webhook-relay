@@ -8,13 +8,13 @@ import (
 type HarborToTeamsMapper struct {
 }
 
-func createDefaultText(in *map[string]interface{}) (text string) {
+func createDefaultText(in *map[string]any) (text string) {
 	return fmt.Sprintf("received %v", *in)
 }
 
-func (HarborToTeamsMapper) Map(in *map[string]interface{}, text *string) (out *map[string]interface{}, err error) {
+func (HarborToTeamsMapper) Map(in *map[string]any, text *string) (out *map[string]any, err error) {
 
-	res := map[string]interface{}{}
+	res := map[string]any{}
 
 	if text == nil {
 		t := createDefaultText(in)

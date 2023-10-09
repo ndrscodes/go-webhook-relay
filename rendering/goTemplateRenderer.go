@@ -35,7 +35,7 @@ func execute(tpl *template.Template, v any) (out *string, err error) {
 	return &res, nil
 }
 
-func (GoTemplateRenderer) Render(payload *map[string]interface{}, resolver resolvers.Resolver) (text *string, err error) {
+func (GoTemplateRenderer) Render(payload *map[string]any, resolver resolvers.Resolver) (text *string, err error) {
 	path := resolver.Resolve(payload)
 
 	tpl, err := findTemplate(path)

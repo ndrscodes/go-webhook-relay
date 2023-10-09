@@ -1,5 +1,5 @@
 package resolvers
 
 type Resolver interface {
-	Resolve(payload *map[string]interface{}) (path string)
+	Resolve(payload *map[string]any) (path string)
 }

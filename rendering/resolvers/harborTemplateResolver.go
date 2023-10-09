@@ -8,7 +8,7 @@ import (
 type HarborTemplateResolver struct {
 }
 
-func extract(payload *map[string]interface{}) (t string, err error) {
+func extract(payload *map[string]any) (t string, err error) {
 	t = ""
 
 	tmp, ok := (*payload)["type"]
@@ -24,7 +24,7 @@ func extract(payload *map[string]interface{}) (t string, err error) {
 	return t, nil
 }
 
-func (HarborTemplateResolver) Resolve(payload *map[string]interface{}) (path string) {
+func (HarborTemplateResolver) Resolve(payload *map[string]any) (path string) {
 	t := "unknown"
 
 	ts, err := extract(payload)
