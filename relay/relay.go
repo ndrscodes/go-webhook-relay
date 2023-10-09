@@ -29,6 +29,7 @@ func (r Relay) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	err := json.NewDecoder(req.Body).Decode(data)
 	if err != nil {
 		http.Error(rw, "Bad Request", http.StatusBadRequest)
+		return
 	}
 
 	r.relay(data)
